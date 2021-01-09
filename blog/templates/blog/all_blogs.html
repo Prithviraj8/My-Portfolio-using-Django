@@ -1,22 +1,24 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+{% extends 'portfolio/base.html'%}
+{% block content %}
 
-<div class="container text-center">
+    <div class="container text-center">
 
-    <h1> {{ blogs.count }} BLog{{ blogs.count|pluralize }} here</h1> 
-    <!-- pluralize detects if the blogs.count > 1 and if yes, then the word with have letter 's' otherwise , it won't -->
-    {% for blog in blogs %}
-        <!-- blog:detail - blog is the app name that we have created in the urls.py of blog app.
-        The reason we do this even though the all_blogs.html is inside the blog app folder, 
-        because we might end up adding an app inside an app and inorder to properly interact the information of either apps, 
-        an app name should be used to display information. -->
-       <a href="{% url 'blog:detail' blog.id %}"><h2>{{ blog.title }}</h2></a> 
-       
-        <h4>{{ blog.date|date:'M d l' }}</h4>
-        <p>{{ blog.description|striptags|truncatechars:100 }}</p>
+        <h1> {{ blogs.count }} BLog{{ blogs.count|pluralize }} here</h1> 
+        <!-- pluralize detects if the blogs.count > 1 and if yes, then the word with have letter 's' otherwise , it won't -->
+        {% for blog in blogs %}
+            <!-- blog:detail - blog is the app name that we have created in the urls.py of blog app.
+            The reason we do this even though the all_blogs.html is inside the blog app folder, 
+            because we might end up adding an app inside an app and inorder to properly interact the information of either apps, 
+            an app name should be used to display information. -->
+        <a href="{% url 'blog:detail' blog.id %}"><h2>{{ blog.title }}</h2></a> 
+        
+            <h4>{{ blog.date|date:'M d l' }}</h4>
+            <p>{{ blog.description|striptags|truncatechars:100 }}</p>
 
-    {% endfor %}
+        {% endfor %}
 
-</div>
+    </div>
+{% endblock %}
 
 
 
